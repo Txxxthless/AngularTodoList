@@ -1,0 +1,19 @@
+<h2>Todo Creation</h2>
+<div class="form-group">
+  <label>New todo description</label>
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Todo description..."
+    style="width: 40%; margin-top: 10px"
+    #descriptionInput
+  />
+</div>
+<button
+  type="submit"
+  class="btn btn-primary"
+  style="margin-top: 10px"
+  (click)="onSubmit()"
+>
+  Submit
+</button>
