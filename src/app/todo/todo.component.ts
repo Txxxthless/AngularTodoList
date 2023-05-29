@@ -23,4 +23,8 @@ export class TodoComponent {
   onDeleteTodo() {
     this.todoService.deleteTodo(this.todo);
   }
+
+  onToggleTodoImporant() {
+    this.todoService.toggleTodoImportant(this.todo);
+  }
 }

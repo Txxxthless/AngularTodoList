@@ -33,4 +33,13 @@ export class TodoService {
     );
     this.todosChanged.emit(this.todos.slice());
   }
+
+  toggleTodoImportant(todo: Todo) {
+    const toChangeTodo: Todo = this.todos.find(
+      (todoItem) => todoItem.description === todo.description
+    );
+    toChangeTodo.isImportant = !toChangeTodo.isImportant;
+    this.todosChanged.emit(this.todos.slice());
+    console.log('!!');
+  }
 }
