@@ -26,4 +26,11 @@ export class TodoService {
     toChangeTodo.isDone = !toChangeTodo.isDone;
     this.todosChanged.emit(this.todos.slice());
   }
+
+  deleteTodo(todo: Todo) {
+    this.todos = this.todos.filter(
+      (todoItem) => todoItem.description !== todo.description
+    );
+    this.todosChanged.emit(this.todos.slice());
+  }
 }

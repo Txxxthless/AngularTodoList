@@ -19,4 +19,8 @@ export class TodoComponent {
   onToggleTodo() {
     this.todoService.toggleTodo(this.todo);
   }
+
+  onDeleteTodo() {
+    this.todoService.deleteTodo(this.todo);
+  }
 }
