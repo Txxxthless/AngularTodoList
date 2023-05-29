@@ -16,6 +16,14 @@ export class TodoService {
 
   addTodo(todo: Todo) {
     this.todos.push(todo);
-    this.todosChanged.emit(this.todos);
+    this.todosChanged.emit(this.todos.slice());
+  }
+
+  toggleTodo(todo: Todo) {
+    const toChangeTodo: Todo = this.todos.find(
+      (todoItem) => todoItem.description === todo.description
+    );
+    toChangeTodo.isDone = !toChangeTodo.isDone;
+    this.todosChanged.emit(this.todos.slice());
   }
 }

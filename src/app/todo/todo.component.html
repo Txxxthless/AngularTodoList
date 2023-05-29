@@ -1,3 +1,15 @@
-<h5>
-  {{ todo.description }}
-</h5>
+<div>
+  <input
+    class="form-check-input"
+    type="checkbox"
+    value=""
+    (click)="onToggleTodo()"
+  />
+  <label
+    class="form-check-label"
+    [style.color]="todo.isDone ? '#808080' : 'black'"
+    style="margin-left: 15px"
+  >
+    {{ todo.description }}
+  </label>
+</div>
