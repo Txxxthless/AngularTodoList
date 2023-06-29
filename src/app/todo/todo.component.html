@@ -20,7 +20,7 @@
     <input
       class="form-check-input"
       type="checkbox"
-      value=""
+      [checked]="todo.isDone"
       (click)="onToggleTodo()"
       style="margin-right: 10px"
     />
@@ -39,10 +39,7 @@
     >
       Important
     </button>
-    <button
-      class="btn btn-outline-danger"
-      (click)="onDeleteTodo()"
-    >
+    <button class="btn btn-outline-danger" (click)="onDeleteTodo()">
       Delete
     </button>
   </div>
