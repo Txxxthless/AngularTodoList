@@ -8,6 +8,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoCreateComponent } from './todo-create/todo-create.component';
 import { TodoService } from './services/todo.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { TodoService } from './services/todo.service';
     TodoComponent,
     TodoCreateComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [TodoService],
   bootstrap: [AppComponent],
 })

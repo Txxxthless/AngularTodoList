@@ -1,6 +1,7 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../models/todo.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-create',
@@ -8,20 +9,21 @@ import { Todo } from '../models/todo.model';
   styleUrls: ['./todo-create.component.css'],
 })
 export class TodoCreateComponent {
-  todoService: TodoService;
+  creationForm = new FormGroup({
+    description: new FormControl('', [Validators.required]),
+  });
 
-  @ViewChild('descriptionInput') descriptionInputRef: ElementRef;
-
-  constructor(todoService: TodoService) {
-    this.todoService = todoService;
-  }
+  constructor(private todoService: TodoService) {}
 
   onSubmit() {
-    if (this.descriptionInputRef.nativeElement.value) {
-      this.todoService.addTodo(
-        new Todo(this.descriptionInputRef.nativeElement.value)
-      );
-      this.descriptionInputRef.nativeElement.value = '';
+    if (this.description.value.trim()) {
+      this.todoService.addTodo(new Todo(this.description.value));
+      this.description.setValue('');
+      this.description.markAsPristine();
     }
+  }
+
+  get description() {
+    return this.creationForm.get('description');
   }
 }

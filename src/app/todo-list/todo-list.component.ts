@@ -16,7 +16,6 @@ export class TodoListComponent implements OnInit {
     this.todoService.todos.subscribe({
       next: (todos) => {
         this.todos = todos;
-        console.log(this.todoService.todos.value);
       },
     });
   }
