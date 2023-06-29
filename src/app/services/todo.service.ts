@@ -15,6 +15,7 @@ export class TodoService {
 
   addTodo(todo: Todo) {
     this.todos.next([...this.todos.value, todo]);
+    this.cacheTodos();
   }
 
   toggleTodo(todo: Todo) {
@@ -22,6 +23,7 @@ export class TodoService {
       (todoItem) => todoItem.description === todo.description
     );
     toChangeTodo.isDone = !toChangeTodo.isDone;
+    this.cacheTodos();
   }
 
   deleteTodo(todo: Todo) {
@@ -30,6 +32,7 @@ export class TodoService {
         (todoItem) => todoItem.description !== todo.description
       )
     );
+    this.cacheTodos();
   }
 
   toggleTodoImportant(todo: Todo) {
@@ -37,5 +40,10 @@ export class TodoService {
       (todoItem) => todoItem.description === todo.description
     );
     toChangeTodo.isImportant = !toChangeTodo.isImportant;
+    this.cacheTodos();
+  }
+
+  cacheTodos() {
+    localStorage.setItem('todos', JSON.stringify(this.todos.value));
   }
 }
