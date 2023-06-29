@@ -10,16 +10,14 @@ import { TodoService } from '../services/todo.service';
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
 
-  private todoService: TodoService;
-
-  constructor(todoService: TodoService) {
-    this.todoService = todoService;
-  }
+  constructor(private todoService: TodoService) {}
 
   ngOnInit() {
-    this.todos = this.todoService.getTodos();
-    this.todoService.todosChanged.subscribe((todos: Todo[]) => {
-      this.todos = todos;
+    this.todoService.todos.subscribe({
+      next: (todos) => {
+        this.todos = todos;
+        console.log(this.todoService.todos.value);
+      },
     });
   }
 }

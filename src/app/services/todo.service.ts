@@ -1,45 +1,41 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class TodoService {
-  private todos: Todo[] = [
+  todos = new BehaviorSubject<Todo[]>([
     new Todo('Wash the dishes'),
     new Todo('Learn Angular'),
-  ];
-
-  todosChanged = new EventEmitter<Todo[]>();
+  ]);
 
   getTodos() {
-    return this.todos.slice();
+    return this.todos.value;
   }
 
   addTodo(todo: Todo) {
-    this.todos.push(todo);
-    this.todosChanged.emit(this.todos.slice());
+    this.todos.next([...this.todos.value, todo]);
   }
 
   toggleTodo(todo: Todo) {
-    const toChangeTodo: Todo = this.todos.find(
+    const toChangeTodo: Todo = this.todos.value.find(
       (todoItem) => todoItem.description === todo.description
     );
     toChangeTodo.isDone = !toChangeTodo.isDone;
-    this.todosChanged.emit(this.todos.slice());
   }
 
   deleteTodo(todo: Todo) {
-    this.todos = this.todos.filter(
-      (todoItem) => todoItem.description !== todo.description
+    this.todos.next(
+      this.todos.value.filter(
+        (todoItem) => todoItem.description !== todo.description
+      )
     );
-    this.todosChanged.emit(this.todos.slice());
   }
 
   toggleTodoImportant(todo: Todo) {
-    const toChangeTodo: Todo = this.todos.find(
+    const toChangeTodo: Todo = this.todos.value.find(
       (todoItem) => todoItem.description === todo.description
     );
     toChangeTodo.isImportant = !toChangeTodo.isImportant;
-    this.todosChanged.emit(this.todos.slice());
-    console.log('!!');
   }
 }
